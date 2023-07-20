@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gráfico de Linhas</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <canvas id="lineChart" width="400" height="200"></canvas>
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+  // Função para obter os últimos 6 meses
+  function getLast6Months() {
+    const months = [];
+    const currentDate = new Date();
+    for (let i = 5; i >= 0; i--) {
+      const month = currentDate.getMonth() - i;
+      const year = currentDate.getFullYear();
+      months.push(`${month + 1}/${year}`);
+    }
+    return months;
+  }
+
+  // Dados dos últimos 6 meses (substitua com seus próprios dados)
+  const data = [100, 150, 200, 180, 250, 300];
+
+  // Meses dos últimos 6 meses (obtidos automaticamente)
+  const months = getLast6Months();
+
+  // Crie o contexto do gráfico
+  const ctx = document.getElementById('lineChart').getContext('2d');
+
+  // Crie o gráfico de linhas
+  const lineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: months, // Use os meses como rótulos do eixo X
+      datasets: [{
+        label: 'Vendas Mensais',
+        borderColor: 'blue',
+        backgroundColor: 'rgba(0, 0, 255, 0.2)',
+        data: data, // Use os dados dos últimos 6 meses
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          grid: {
+            display: false // Ocultar linhas de grade no eixo X
+          }
+        },
+        y: {
+          beginAtZero: true // Começar o eixo Y a partir do valor zero
+        }
+      }
+    }
+  });
+});
+
+
+  </script>
+  <script src="seu_script.js"></script>
+</body>
+</html>
